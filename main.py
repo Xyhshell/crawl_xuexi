@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-@Auther :liuyuqi.gov@msn.cn
-@date :2019/4/8
-'''
-__author__ = "liuyuqi"
 
 import json
 import os
@@ -14,9 +9,11 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing
 
 import requests
-
 import DownloadProgress
 import user_agent
+import filepath
+
+# from webbrowser import open
 
 s = requests.Session()
 
@@ -44,7 +41,8 @@ def downloadVideo(url, file_name):
     with closing(s.get(url=url, stream=True, headers=headers)) as response:
         chunk_size = 1024
         content_size = int(response.headers['content-length'])
-        file_D = './Video/' + file_name + '.mp4'
+        file_D = this_path + file_name + '.mp4'
+        # file_D = './Video/' + file_name + '.mp4'
         if (os.path.exists(file_D) and os.path.getsize(file_D) == content_size):
             print('跳过' + file_name)
         else:
@@ -110,13 +108,23 @@ def getLessonList(url):
 
 
 if __name__ == '__main__':
+    print(" | " + '-'*56)
+    print(" |  1.程序正常情况不会闪退，理论无Bug")
+    print(" |  2.程序可多开，每个程序工作时附带10个线程，请依主机性能使用")
+    print(" |  4.程序二改于：https://github.com/jianboy/crawl_xuexi -*侵删*-")
+    print(" |  3.程序仅供测试，请合理化使用，请勿用于灰产")
+    print(" |  5.学习强国，YYDS!")
+    print(" | " + '-'*56 + '\n')
+
     start_time = time.time()
-    if not os.path.exists("Video"):
-        os.mkdir("Video")
+    this_path = filepath.openpath() + '/'
+
     if len(sys.argv) == 2:
         url = sys.argv[1]
     else:
         url = input(
-            "请输入“学习慕课”下面的免费课程链接：（eg：https://www.xuexi.cn/9f584b49d8a7386a4cf248ce16f5e667/9b0f04ec6509904be734f5f609a3604a.html）")
+            "> 推荐输入“学习慕课”界面下的视频链接：\n\r（eg：https://www.xuexi.cn/9f584b49d8a7386a4cf248ce16f5e667/9b0f04ec6509904be734f5f609a3604a.html）\n\r> :")
     crawl(url)
     print("last time: {} s".format(time.time() - start_time))
+    print("\n\r> 全部视频下载完成，回车退出！")
+    input('')

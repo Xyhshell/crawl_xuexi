@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-多线程下载多文件;多线程分段下载单文件.
-@Auther :liuyuqi.gov@msn.cn
-@date :2019/4/8
-'''
-__author__ = "liuyuqi"
 
 from threading import Lock
 from threading import Thread

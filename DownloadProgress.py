@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-下载进度
-@Auther :liuyuqi.gov@msn.cn
-@date :2019/4/8
-'''
-__author__ = "liuyuqi"
-
 
 class DownloadProgress(object):
     def __init__(self, title, count=0.0, run_status=None, fin_status=None, total=100.0, unit='', sep='/',
